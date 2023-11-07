@@ -5,9 +5,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
-mongoose.connect( process.env.MONGO_URL );
-// .then(()=>console.log("mongodbis connected"))
+// mongoose.connect(process.env.LOCAL_URL)
+// .then(()=>console.log("mongodbLocal is connected"))
 // .catch((error)=>console.error(error));
+mongoose.connect( process.env.MONGO_URL )
+ .then(()=>console.log("mongodbAtlas connected"))
+ .catch((error)=>console.error(error));
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -24,7 +28,7 @@ app.get("/fetchdata", async function (req, res) {
     const data=await Storage.find();
     
      if (data.length > 0) {
-        console.log(data); 
+       // console.log(data); 
         res.json(data);
      }
 });
