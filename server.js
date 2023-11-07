@@ -24,6 +24,9 @@ const dataSchema=new Schema({
 const Storage=mongoose.model("data",dataSchema);
 
 //let data=[];
+app.get("/",function(req,res){
+res.send("ok");
+});
 app.get("/fetchdata", async function (req, res) {
     const data=await Storage.find();
     
